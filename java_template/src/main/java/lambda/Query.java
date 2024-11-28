@@ -1,7 +1,13 @@
+package lambda;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import saaf.Inspector;
+import saaf.Response;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +59,7 @@ public class Query implements RequestHandler<HashMap<String, Object>, HashMap<St
             List<HashMap<String, Object>> resultData = queryDatabase(filters, aggregations, groupByColumn);
 
             // Add results to the response
-            response.setValue(resultData);
+            response.setValue(resultData.toString());
             inspector.addAttribute("status", "success");
         } catch (Exception e) {
             // Handle errors

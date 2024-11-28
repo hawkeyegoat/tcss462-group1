@@ -1,7 +1,11 @@
+package lambda;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import com.opencsv.exceptions.CsvException;
+import saaf.Inspector;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -61,7 +65,7 @@ public class Transform implements RequestHandler<HashMap<String, Object>, HashMa
         inspector.inspectAllDeltas();
         return inspector.finish();
     }
-    public List<String[]> processCSV(InputStream csvInputStream) throws IOException {
+    public List<String[]> processCSV(InputStream csvInputStream) throws IOException, CsvException {
         try (CSVReader reader = new CSVReader(new InputStreamReader(csvInputStream))) {
             List<String[]> records = reader.readAll();
             if (records.isEmpty()) throw new IllegalArgumentException("CSV is empty!");

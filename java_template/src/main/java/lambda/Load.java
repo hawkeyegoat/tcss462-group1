@@ -1,7 +1,11 @@
+package lambda;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import saaf.Inspector;
+import saaf.Response;
 
 import java.io.*;
 import java.sql.*;
